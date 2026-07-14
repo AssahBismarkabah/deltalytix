@@ -80,8 +80,11 @@ jobs:
 
           Review the changes before merging. Resolve any conflicts manually if the merge did not complete cleanly."
 
+          # Remove upstream remote so gh doesn't confuse it with the target repo
+          git remote remove upstream
+
           gh pr create \
             --title "Sync upstream ($(date -u +%Y-%m-%d))" \
             --body "$PR_BODY" \
             --base main \
-            --head "${{ github.repository_owner }}:$BRANCH"
+            --head "$BRANCH"
